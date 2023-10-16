@@ -1,24 +1,49 @@
 function x(){
     //CPU REGISTERS
-    let registers = [{RA:0},{RB:0}, {RC:0}, {RD:0} ]
-    function run(instructions){
-        let PC = 0
-        
-        switch(instructions[PC]){
-            case 10:
+    // 0=>RA
+    // 1=>RB
+    // 2=>RC
+    // 3=>RD
+    // 4=> ACC (accumulator)
+    let registers = [0,0,0,0,0]
+    function run(memory){
+       
+        for(let PC = 0 ;PC < memory.length; PC++){
+            switch(memory[PC]){
+                case 10:
+                    PC++
+                        registers[memory[PC]]= parseInt([memory[PC+1]], 10) 
+                   
+                    PC++
+                    
+                    break
+                case 20:
+                    
+                    PC++
+                    registers[memory[PC]] += memory[PC+1]
+                    PC++
+                    break
 
-                break
+                case 40:
+                    
+                    break
+                    
+            }
         }
+        
+       
         
     }
 
     function print(){
         console.log(registers)
     }
-    function load(memory){
-        let instructions = [...memory]
+    function load(instructions){
+        let memory = [...instructions]
 
-        run(instructions)
+        run(memory)
+
+        print()
     }
     return {run, print, load};
 }
@@ -26,6 +51,6 @@ function x(){
 
 let cpu = x();
 
-cpu.load([10, 50, 30])
+cpu.load([10, 0, 30,20, 0, 30, 30])
 
 
