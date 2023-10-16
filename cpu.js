@@ -41,7 +41,12 @@ function CPU(){
 
                 case 30:
                     PC++
-                    registers[memory[PC]] -= memory[PC+1]
+                    if(regs.includes(memory[PC+1])){
+                        registers[memory[PC]] -=  registers[regs.indexOf(memory[PC+1])]
+                    }else{
+                        registers[memory[PC]] -= memory[PC+1]
+                    }
+                    
                     PC++
                     break
                     
@@ -68,9 +73,6 @@ function CPU(){
 
 let cpu = CPU();
 
-cpu.load([10, 0, 80])
+cpu.load([10, 0, 80, 10, 4, 100, 10, 0, `ACC`, 30, 0, `ACC`,30, 4, 4])
 
 
-
-
-let x = "15"; 
