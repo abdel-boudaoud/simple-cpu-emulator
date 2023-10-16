@@ -66,6 +66,17 @@ function CPU() {
 
           PC++;
           break;
+          case 60:
+            PC++
+            PC += memory[PC]
+            PC++
+            break
+          case 90:
+            PC++
+            registers[memory[PC]] = parseInt([memory[PC + 1]], 10);
+            PC++
+            break
+            
       }
     }
   }
@@ -85,4 +96,4 @@ function CPU() {
 
 let cpu = CPU();
 
-cpu.load([10, 0, 100, 10, 1, 2, 50, 0, `RB`, 10, 4, `RA`, 50, 4, `RB`]);
+cpu.load([90, 1, 50]);
