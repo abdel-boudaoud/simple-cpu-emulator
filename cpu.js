@@ -91,10 +91,21 @@ function CPU() {
           stack.push(memory[PC]);
           PC++;
           break;
+        case 120:
+          //POP from stack
+          PC++;
+          stack.pop();
+          PC++;
+          break;
+        case 150:
+            //HALT
+            halted = true;
+            break
         case 160:
           //DO NOTHING
           PC++;
           break;
+        
       }
     }
   }
@@ -116,5 +127,6 @@ function CPU() {
 let cpu = CPU();
 
 cpu.load([
-  90, 1, 50, 10, 0, 80, 110, 50, 160, 10, 0, 50, 10, 0, 250, 110, 90, 160,
+  90, 1, 50,  10, 0, 80, 110, 50, 160, 10, 0, 50, 10, 0, 250, 110, 90, 160, 120,
+  160, 160, 10, 4, 200,
 ]);
