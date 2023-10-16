@@ -6,7 +6,7 @@ function CPU(){
     // 3=>RD
     // 4=> ACC (accumulator)
     let registers = [0,0,0,0,0]
-    
+    let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`]
     let halted = false;
     function run(memory){
        
@@ -17,7 +17,12 @@ function CPU(){
             switch(memory[PC]){
                 case 10:
                     PC++
-                        registers[memory[PC]]= parseInt([memory[PC+1]], 10) 
+                    if(parseInt([memory[PC+1]], 10)){
+                        registers[memory[PC]]= parseInt([memory[PC+1]], 10)
+                    }else if(regs.includes(memory[PC+1])){
+                        registers[memory[PC]] =  registers[regs.indexOf(memory[PC+1])]
+                    }
+                         
                    
                     PC++
                     
@@ -29,8 +34,10 @@ function CPU(){
                     PC++
                     break
 
-                case 40:
-                    halted = true
+                case 30:
+                    PC++
+                    registers[memory[PC]] -= memory[PC+1]
+                    PC++
                     break
                     
             }
@@ -56,6 +63,9 @@ function CPU(){
 
 let cpu = CPU();
 
-cpu.load([10, 0, 80, 20, 0, 10])
+cpu.load([10, 0, 80, 20, 0, `RA`])
 
 
+
+
+let x = "15"; 
