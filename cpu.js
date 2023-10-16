@@ -1,4 +1,4 @@
-function x(){
+function CPU(){
     //CPU REGISTERS
     // 0=>RA
     // 1=>RB
@@ -6,9 +6,14 @@ function x(){
     // 3=>RD
     // 4=> ACC (accumulator)
     let registers = [0,0,0,0,0]
+    
+    let halted = false;
     function run(memory){
        
         for(let PC = 0 ;PC < memory.length; PC++){
+            if(halted == true){
+                break
+            }
             switch(memory[PC]){
                 case 10:
                     PC++
@@ -25,7 +30,7 @@ function x(){
                     break
 
                 case 40:
-                    
+                    halted = true
                     break
                     
             }
@@ -49,8 +54,8 @@ function x(){
 }
 
 
-let cpu = x();
+let cpu = CPU();
 
-cpu.load([10, 0, 30,20, 0, 30, 30])
+cpu.load([10, 0, 80, 20, 0, 10])
 
 
