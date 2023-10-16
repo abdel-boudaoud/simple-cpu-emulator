@@ -22,16 +22,16 @@ This README provides explanations for the opcodes used in the basic CPU emulator
 6. **Opcode 60: JMP (Jump)**
    - Description: Transfers control to another location in memory. Conditional and unconditional jump instructions are often available to change the program's flow.
 
-7. **Opcode 70: CMP (Compare)**
+7. **Opcode 70: CMP (Compare) (Not implemented yet)**
    - Description: Compares two values, typically setting flags in the process, which can be used for conditional branching.
 
-8. **Opcode 80: BRANCH (Conditional Branch)**
+8. **Opcode 80: BRANCH (Conditional Branch) (Not implemented yet)**
    - Description: Based on the result of a comparison or a condition, a branch instruction can jump to different parts of the program.
 
 9. **Opcode 90: LOAD (Load from Memory)**
    - Description: Loads a value from memory into a register.
 
-10. **Opcode 100: STORE (Store to Memory)**
+10. **Opcode 100: STORE (Store to Memory) (Not implemented yet)**
     - Description: Stores a value from a register into a memory location.
 
 11. **Opcode 110: PUSH (Push onto Stack)**
@@ -40,10 +40,10 @@ This README provides explanations for the opcodes used in the basic CPU emulator
 12. **Opcode 120: POP (Pop from Stack)**
     - Description: Pops the top value from a stack and stores it in a register. Often used in function return operations.
 
-13. **Opcode 130: CALL (Call Subroutine)**
+13. **Opcode 130: CALL (Call Subroutine) (Not implemented yet)**
     - Description: Calls a subroutine, pushing the return address onto the stack. Used for function calls and creating nested execution contexts.
 
-14. **Opcode 140: RET (Return from Subroutine)**
+14. **Opcode 140: RET (Return from Subroutine) (Not implemented yet)**
     - Description: Returns from a subroutine, popping the return address from the stack and resuming execution from that address.
 
 15. **Opcode 150: HALT (Halt Execution)**
@@ -52,21 +52,21 @@ This README provides explanations for the opcodes used in the basic CPU emulator
 16. **Opcode 160: NOP (No Operation)**
     - Description: A "do nothing" instruction, often used for padding or alignment.
 
-17. **Opcode 170: AND (Bitwise AND)**
+17. **Opcode 170: AND (Bitwise AND) (Not implemented yet)**
     - Description: Performs a bitwise AND operation on the bits of two values.
 
-18. **Opcode 180: OR (Bitwise OR)**
+18. **Opcode 180: OR (Bitwise OR) (Not implemented yet)**
     - Description: Performs a bitwise OR operation on the bits of two values.
 
-19. **Opcode 190: XOR (Bitwise XOR)**
+19. **Opcode 190: XOR (Bitwise XOR) (Not implemented yet)**
     - Description: Performs a bitwise XOR operation on the bits of two values.
 
-20. **Opcode 200: SHL (Shift Left)**
+20. **Opcode 200: SHL (Shift Left) (Not implemented yet)**
     - Description: Shifts the bits of a value to the left.
 
-21. **Opcode 210: SHR (Shift Right)**
+21. **Opcode 210: SHR (Shift Right) (Not implemented yet)**
     - Description: Shifts the bits of a value to the right.
 
-22. **Opcode 220: LOAD IMMEDIATE (Load Immediate Value)**
+22. **Opcode 220: LOAD IMMEDIATE (Load Immediate Value) (Not implemented yet)**
     - Description: Loads a constant value directly into a register.
 
