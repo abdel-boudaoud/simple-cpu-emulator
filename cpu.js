@@ -18,10 +18,12 @@ function CPU() {
         case 10:
           //MOV
           PC++;
-          if (parseInt([memory[PC + 1]], 10)) {
-            registers[memory[PC]] = parseInt([memory[PC + 1]], 10);
-          } else if (regs.includes(memory[PC + 1])) {
-            registers[memory[PC]] = registers[regs.indexOf(memory[PC + 1])];
+          let operand = memory[PC + 1];
+
+          if (!isNaN(operand)) {
+            registers[memory[PC]] = parseInt([operand], 10);
+          } else if (regs.includes(operand)) {
+            registers[memory[PC]] = registers[regs.indexOf(operand)];
           }
 
           PC++;
@@ -30,6 +32,7 @@ function CPU() {
         case 20:
           //ADD
           PC++;
+
           if (regs.includes(memory[PC + 1])) {
             registers[memory[PC]] += registers[regs.indexOf(memory[PC + 1])];
           } else {
@@ -98,14 +101,13 @@ function CPU() {
           PC++;
           break;
         case 150:
-            //HALT
-            halted = true;
-            break
+          //HALT
+          halted = true;
+          break;
         case 160:
           //DO NOTHING
           PC++;
           break;
-        
       }
     }
   }
@@ -126,7 +128,4 @@ function CPU() {
 
 let cpu = CPU();
 
-cpu.load([
-  90, 1, 50,  10, 0, 80, 110, 50, 160, 10, 0, 50, 10, 0, 250, 110, 90, 160, 120,
-  160, 160, 10, 4, 200,
-]);
+cpu.load([10, 0, 500]);
