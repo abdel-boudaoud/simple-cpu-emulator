@@ -1,7 +1,7 @@
 let instructions = `
 .start
-    MOV RA, 20
-    MOV 2, 50
+    MOV RA, 50
+    MOV RA, RB
 .end
 `;
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
@@ -41,7 +41,9 @@ let parser = (code) => {
               let arg2 = tokens[i + 2];
               if (regs.includes(arg1) && parseInt(arg2, 10)) {
                 console.log([10, regs.indexOf(arg1), parseInt(arg2, 10)]);
-              } else {
+              } else if(regs.includes(arg1) && regs.includes(arg2)) {
+                console.log([10, regs.indexOf(arg2), arg1]);
+              }else{
                 console.log([10, parseInt(arg1, 10), parseInt(arg2, 10)]);
               }
           }
@@ -52,3 +54,6 @@ let parser = (code) => {
 };
 
 parser(instructions);
+
+
+
