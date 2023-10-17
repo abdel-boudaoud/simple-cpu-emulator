@@ -1,16 +1,26 @@
 let instructions = `
 .start
-MOV RA, 10
-MOV RB, 15
-MOV RB, RC
-JMP, 2
+    MOV RA, 10
+    MOV RB, 15
+    MOV RB, RC
+    ADD 50, RA
+    JMP, 2
 .end
 `;
 
 let parser = (code) => {
-  let tokens = instructions.trim().replace(/\n/g, " ").split(" ");
+  let tokens = instructions
+    .trim()
+    .replace(/\n/g, " ")
+    .replace(/,/g, "")
+    .split(" ")
+    .filter((token) => {
+      if (!token == "") {
+        return token;
+      }
+    });
 
-  let tokenCount = [
+  let tokenArgCount = [
     { name: ".start", args: 0 },
     { name: ".end", args: 0 },
     { name: "MOV", args: 2 },
@@ -25,14 +35,21 @@ let parser = (code) => {
     { name: "PUSH", args: 1 },
     { name: "POP", args: 1 },
   ];
-
-  console.log(tokens);
-
-  tokenCount.map((token) => {
-    if (token.name === "LOAD") {
-      console.log(token.name);
+  for (let i = 0; i < tokens.length; i++) {
+    if (tokens[i] === ".end") {
+      break;
+    } else {
+      tokenArgCount.map((token) => {
+        if (token.name === tokens[i]) {
+          switch (token.name) {
+            case "MOV":
+              console.log([10, tokens[i + 1], tokens[i + 2]]);
+          }
+        }
+      });
     }
-  });
+  }
 };
 
 parser(instructions);
+
