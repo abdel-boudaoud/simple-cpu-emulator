@@ -1,6 +1,6 @@
 # Basic CPU Emulator Opcodes
 
-This README provides explanations for the opcodes used in the basic CPU emulator implemented in JavaScript. Each opcode corresponds to a specific operation that the CPU can perform. The emulator uses numerical opcodes to represent these operations. Here is a list of the opcodes and their descriptions:
+the opcodes used in the basic CPU emulator implemented in JavaScript. Each opcode corresponds to a specific operation that the CPU can perform. The emulator uses numerical opcodes to represent these operations. Here is a list of the opcodes and their descriptions:
 
 ## Opcodes
 
