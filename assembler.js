@@ -1,12 +1,10 @@
 let instructions = `
 .start
-    MOV RA, 10
-    MOV RB, 15
-    MOV RB, RC
-    ADD 50, RA
-    JMP, 2
+    MOV RA, 20
+    MOV 2, 50
 .end
 `;
+let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
 
 let parser = (code) => {
   let tokens = instructions
@@ -14,11 +12,7 @@ let parser = (code) => {
     .replace(/\n/g, " ")
     .replace(/,/g, "")
     .split(" ")
-    .filter((token) => {
-      if (!token == "") {
-        return token;
-      }
-    });
+    .filter(Boolean);
 
   let tokenArgCount = [
     { name: ".start", args: 0 },
@@ -43,7 +37,13 @@ let parser = (code) => {
         if (token.name === tokens[i]) {
           switch (token.name) {
             case "MOV":
-              console.log([10, tokens[i + 1], tokens[i + 2]]);
+              let arg1 = tokens[i + 1];
+              let arg2 = tokens[i + 2];
+              if (regs.includes(arg1) && parseInt(arg2, 10)) {
+                console.log([10, regs.indexOf(arg1), parseInt(arg2, 10)]);
+              } else {
+                console.log([10, parseInt(arg1, 10), parseInt(arg2, 10)]);
+              }
           }
         }
       });
@@ -52,4 +52,3 @@ let parser = (code) => {
 };
 
 parser(instructions);
-
