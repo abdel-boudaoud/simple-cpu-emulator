@@ -14,23 +14,32 @@ let tokenArgCount = [
   { name: "POP", args: 1 },
 ];
 
-let assembleMOV = (tokenizedCode, i) => {
-
+let assembleMOV = (tokenizedCode, i, finalInstructions) => {
   let arg1 = tokenizedCode[i + 1];
   let arg2 = tokenizedCode[i + 2];
   if (regs.includes(arg1) && parseInt(arg2, 10)) {
-    console.log([10, regs.indexOf(arg1), parseInt(arg2, 10)]);
+    finalInstructions.push(10, regs.indexOf(arg1), parseInt(arg2, 10));
   } else if (regs.includes(arg1) && regs.includes(arg2)) {
-    console.log([10, regs.indexOf(arg2), arg1]);
+    finalInstructions.push(10, regs.indexOf(arg2), arg1);
   } else {
-    console.log([10, parseInt(arg1, 10), parseInt(arg2, 10)]);
+    finalInstructions.push(10, parseInt(arg1, 10), parseInt(arg2, 10));
   }
+};
 
+let assembleADD = (tokenizedCode, i, finalInstructions) => {
+  let arg1 = tokenizedCode[i + 1];
+  let arg2 = tokenizedCode[i + 2];
+  if (regs.includes(arg1) && parseInt(arg2, 10)) {
+    finalInstructions.push(20, regs.indexOf(arg1), parseInt(arg2, 10));
+  } else if (regs.includes(arg1) && regs.includes(arg2)) {
+    finalInstructions.push(20, regs.indexOf(arg1), arg2);
+  }
 };
 
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
 
 let assembler = () => {
+  let finalInstructions = [];
   let Codetokenizer = (code) => {
     return (tokens = code
       .trim()
@@ -48,17 +57,23 @@ let assembler = () => {
           if (token.name === tokenizedCode[i]) {
             switch (token.name) {
               case "MOV":
-                assembleMOV(tokenizedCode, i)
+                assembleMOV(tokenizedCode, i, finalInstructions);
+                break;
+              case "ADD":
+                assembleADD(tokenizedCode, i, finalInstructions);
+                break;
             }
           }
         });
       }
     }
+
+    console.log(finalInstructions);
     return 0;
   };
   let load = (code) => {
     let tokenizedCode = Codetokenizer(code);
-
+    console.log(tokenizedCode);
     return run(tokenizedCode);
   };
 
@@ -66,13 +81,11 @@ let assembler = () => {
 };
 
 let assmebleCode = assembler();
-
+//ADD 50 TO RA
 let instructions = `
 .start
-    MOV RA, 50
-    MOV RA, RB
-    MOV 0, 50
-    MOV ACC, RA
+    MOV RA, 25
+    ADD RB, RA
 .end
 `;
 
