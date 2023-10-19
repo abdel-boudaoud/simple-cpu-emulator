@@ -56,6 +56,11 @@ let assembleMUL = (tokenizedCode, i, finalInstructions) => {
   }
 };
 
+let assembleJMP = (tokenizedCode, i, finalInstructions) => {
+  let arg1 = tokenizedCode[i + 1];
+  finalInstructions.push(60, parseInt(arg1, 10), 160)
+};
+
 let assembleDIV = (tokenizedCode, i, finalInstructions) => {
   let arg1 = tokenizedCode[i + 1];
   let arg2 = tokenizedCode[i + 2];
@@ -100,6 +105,8 @@ let assembler = () => {
               case "DIV":
                 assembleDIV(tokenizedCode, i, finalInstructions);
                 break
+              case "JMP":
+                assembleJMP(tokenizedCode, i, finalInstructions)
             }
           }
         });
@@ -123,8 +130,7 @@ let assmebleCode = assembler();
 let instructions = `
 .start
       MOV RA, 50
-      MOV RB, 2
-      DIV RA, 50
+      JMP 2 
 .end
 `;
 
