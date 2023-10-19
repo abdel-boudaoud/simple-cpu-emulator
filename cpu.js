@@ -128,4 +128,4 @@ function CPU() {
 
 let cpu = CPU();
 
-cpu.load([10, 0, 50, 10, 1, 3, 30, 0, "RB"]);
+cpu.load([10, 0, 50, 10, 1, 2, 40, 0, "RB"]);

@@ -45,6 +45,17 @@ let assembleSUB= (tokenizedCode, i, finalInstructions) => {
     finalInstructions.push(30, regs.indexOf(arg1), arg2);
   }
 };
+
+
+let assembleMUL= (tokenizedCode, i, finalInstructions) => {
+  let arg1 = tokenizedCode[i + 1];
+  let arg2 = tokenizedCode[i + 2];
+  if (regs.includes(arg1) && parseInt(arg2, 10)) {
+    finalInstructions.push(40, regs.indexOf(arg1), parseInt(arg2, 10));
+  } else if (regs.includes(arg1) && regs.includes(arg2)) {
+    finalInstructions.push(40, regs.indexOf(arg1), arg2);
+  }
+};
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
 
 let assembler = () => {
@@ -74,6 +85,9 @@ let assembler = () => {
               case "SUB":
                 assembleSUB(tokenizedCode, i,finalInstructions)
                 break
+              case "MUL":
+                assembleMUL(tokenizedCode, i, finalInstructions)
+                break
             }
           }
         });
@@ -97,8 +111,8 @@ let assmebleCode = assembler();
 let instructions = `
 .start
       MOV RA, 50
-      MOV RB, 3
-      SUB RA, RB
+      MOV RB, 2
+      MUL RA, RB
 .end
 `;
 
