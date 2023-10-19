@@ -36,7 +36,7 @@ let assembleADD = (tokenizedCode, i, finalInstructions) => {
   }
 };
 
-let assembleSUB= (tokenizedCode, i, finalInstructions) => {
+let assembleSUB = (tokenizedCode, i, finalInstructions) => {
   let arg1 = tokenizedCode[i + 1];
   let arg2 = tokenizedCode[i + 2];
   if (regs.includes(arg1) && parseInt(arg2, 10)) {
@@ -46,14 +46,23 @@ let assembleSUB= (tokenizedCode, i, finalInstructions) => {
   }
 };
 
-
-let assembleMUL= (tokenizedCode, i, finalInstructions) => {
+let assembleMUL = (tokenizedCode, i, finalInstructions) => {
   let arg1 = tokenizedCode[i + 1];
   let arg2 = tokenizedCode[i + 2];
   if (regs.includes(arg1) && parseInt(arg2, 10)) {
     finalInstructions.push(40, regs.indexOf(arg1), parseInt(arg2, 10));
   } else if (regs.includes(arg1) && regs.includes(arg2)) {
     finalInstructions.push(40, regs.indexOf(arg1), arg2);
+  }
+};
+
+let assembleDIV = (tokenizedCode, i, finalInstructions) => {
+  let arg1 = tokenizedCode[i + 1];
+  let arg2 = tokenizedCode[i + 2];
+  if (regs.includes(arg1) && parseInt(arg2, 10)) {
+    finalInstructions.push(50, regs.indexOf(arg1), parseInt(arg2, 10));
+  } else if (regs.includes(arg1) && regs.includes(arg2)) {
+    finalInstructions.push(50, regs.indexOf(arg1), arg2);
   }
 };
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
@@ -83,10 +92,13 @@ let assembler = () => {
                 assembleADD(tokenizedCode, i, finalInstructions);
                 break;
               case "SUB":
-                assembleSUB(tokenizedCode, i,finalInstructions)
-                break
+                assembleSUB(tokenizedCode, i, finalInstructions);
+                break;
               case "MUL":
-                assembleMUL(tokenizedCode, i, finalInstructions)
+                assembleMUL(tokenizedCode, i, finalInstructions);
+                break;
+              case "DIV":
+                assembleDIV(tokenizedCode, i, finalInstructions);
                 break
             }
           }
@@ -112,7 +124,7 @@ let instructions = `
 .start
       MOV RA, 50
       MOV RB, 2
-      MUL RA, RB
+      DIV RA, 50
 .end
 `;
 
