@@ -87,6 +87,10 @@ let assemblePUSH =(tokenizedCode, i, finalInstructions) =>{
     finalInstructions.push(110, parseInt(arg1, 10) , 160)
   }
 }
+
+let assemblePOP = (finalInstructions) =>{
+  finalInstructions.push(120, 160, 160)
+}
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
 
 let assembler = () => {
@@ -131,6 +135,9 @@ let assembler = () => {
               case "PUSH":
                 assemblePUSH(tokenizedCode, i, finalInstructions)
                 break
+              case "POP":
+                assemblePOP(finalInstructions)
+                break
             }
           }
         });
@@ -156,6 +163,7 @@ let instructions = `
       LOAD RA, 80
       MOV RA, RB
       PUSH, RB
+      POP
 .end
 `;
 
