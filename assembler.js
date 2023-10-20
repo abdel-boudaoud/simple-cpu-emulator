@@ -97,6 +97,10 @@ let assemblePOP = (finalInstructions) =>{
 let assembleHALT = (finalInstructions)=>{
   finalInstructions.push(150)
 }
+
+let assembleNOP = (finalInstructions)=>{
+  finalInstructions.push(160, 160)
+}
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
 
 let assembler = () => {
@@ -147,6 +151,9 @@ let assembler = () => {
               case "HALT":
                 assembleHALT(finalInstructions)
                 break
+              case "NOP":
+                assembleNOP(finalInstructions)
+                break
             }
           }
         });
@@ -170,10 +177,10 @@ let assmebleCode = assembler();
 let instructions = `
 .start
       LOAD RA, 80
-      HALT
+      NOP
       MOV RA, RB
       PUSH, RB
-      POP
+      
 .end
 `;
 
