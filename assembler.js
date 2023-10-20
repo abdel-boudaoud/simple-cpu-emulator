@@ -70,6 +70,14 @@ let assembleDIV = (tokenizedCode, i, finalInstructions) => {
     finalInstructions.push(50, regs.indexOf(arg1), arg2);
   }
 };
+
+
+let assembleLOAD = (tokenizedCode, i, finalInstructions)=>{
+  let arg1 = tokenizedCode[i+1]
+  let arg2 = tokenizedCode[i+2]
+  if(regs.includes(arg1) && !isNaN(arg2))
+  finalInstructions.push(90, regs.indexOf(arg1), parseInt(arg2, 10) )
+}
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
 
 let assembler = () => {
@@ -107,6 +115,8 @@ let assembler = () => {
                 break
               case "JMP":
                 assembleJMP(tokenizedCode, i, finalInstructions)
+              case "LOAD":
+                assembleLOAD(tokenizedCode, i, finalInstructions)
             }
           }
         });
@@ -129,8 +139,7 @@ let assmebleCode = assembler();
 //ADD 50 TO RA
 let instructions = `
 .start
-      MOV RA, 50
-      JMP 2 
+      LOAD ACC, 80
 .end
 `;
 
