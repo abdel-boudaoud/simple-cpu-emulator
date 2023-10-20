@@ -78,6 +78,15 @@ let assembleLOAD = (tokenizedCode, i, finalInstructions)=>{
   if(regs.includes(arg1) && !isNaN(arg2))
   finalInstructions.push(90, regs.indexOf(arg1), parseInt(arg2, 10) )
 }
+
+let assemblePUSH =(tokenizedCode, i, finalInstructions) =>{
+  let arg1 = tokenizedCode[i+1]
+  if(regs.includes(arg1)){
+    finalInstructions.push(110, arg1, 160)
+  }else{
+    finalInstructions.push(110, parseInt(arg1, 10) , 160)
+  }
+}
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
 
 let assembler = () => {
@@ -115,8 +124,13 @@ let assembler = () => {
                 break
               case "JMP":
                 assembleJMP(tokenizedCode, i, finalInstructions)
+                break
               case "LOAD":
                 assembleLOAD(tokenizedCode, i, finalInstructions)
+                break
+              case "PUSH":
+                assemblePUSH(tokenizedCode, i, finalInstructions)
+                break
             }
           }
         });
@@ -139,7 +153,9 @@ let assmebleCode = assembler();
 //ADD 50 TO RA
 let instructions = `
 .start
-      LOAD ACC, 80
+      LOAD RA, 80
+      MOV RA, RB
+      PUSH, RB
 .end
 `;
 

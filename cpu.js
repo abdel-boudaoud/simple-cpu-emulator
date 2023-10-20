@@ -91,7 +91,12 @@ function CPU() {
         case 110:
           //PUSH TO STACK
           PC++;
-          stack.push(memory[PC]);
+          if (regs.includes(memory[PC])) {
+            stack.push(registers[regs.indexOf(memory[PC])]);
+          } else {
+            stack.push(memory[PC]);
+          }
+
           PC++;
           break;
         case 120:
@@ -128,4 +133,4 @@ function CPU() {
 
 let cpu = CPU();
 
-cpu.load([10, 0, 50, 10, 1, 2, 50, 0, 50]);
+cpu.load([90, 0, 80, 10, 1, "RA", 110, "RB", 160]);
