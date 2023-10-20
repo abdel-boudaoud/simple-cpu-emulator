@@ -88,8 +88,14 @@ let assemblePUSH =(tokenizedCode, i, finalInstructions) =>{
   }
 }
 
+
+
 let assemblePOP = (finalInstructions) =>{
   finalInstructions.push(120, 160, 160)
+}
+
+let assembleHALT = (finalInstructions)=>{
+  finalInstructions.push(150)
 }
 let regs = [`RA`, `RB`, `RC`, `RD`, `ACC`];
 
@@ -138,6 +144,9 @@ let assembler = () => {
               case "POP":
                 assemblePOP(finalInstructions)
                 break
+              case "HALT":
+                assembleHALT(finalInstructions)
+                break
             }
           }
         });
@@ -161,6 +170,7 @@ let assmebleCode = assembler();
 let instructions = `
 .start
       LOAD RA, 80
+      HALT
       MOV RA, RB
       PUSH, RB
       POP
